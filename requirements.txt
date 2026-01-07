@@ -5,6 +5,8 @@ sqlalchemy
 joblib
 numpy 
 pandas
+seaborn
+matplotlib
 scikit-learn
 authlib
 passlib
@@ -18,3 +20,5 @@ snakeviz
 line_profiler
 locust
 prometheus-fastapi-instrumentator
+ipykernel
+xgboost
