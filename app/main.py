@@ -1,22 +1,35 @@
 from fastapi import FastAPI
+from contextlib import asynccontextmanager
 from prometheus_fastapi_instrumentator import Instrumentator
-from app.api import routes_auth,routes_predict
+
+from app.api import routes_auth, routes_predict
 from app.middleware.logging_middleware import LoggingMiddleware
 from app.core.exceptions import register_exception_handlers
+from app.db.init_db import init_db
 
 
-app = FastAPI(title='Car Price Prediction Api')
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # startup
+    init_db()
+    yield
+    # shutdown (nothing for now)
 
-#link middleware
 
+app = FastAPI(
+    title="Car Price Prediction Api",
+    lifespan=lifespan
+)
+
+# middleware
 app.add_middleware(LoggingMiddleware)
 
-#link endpoints
-app.include_router(routes_auth.router,tags=['Authorization'])
-app.include_router(routes_predict.router,tags=['Prediction'])
+# routes
+app.include_router(routes_auth.router, tags=["Authorization"])
+app.include_router(routes_predict.router, tags=["Prediction"])
 
-# monitoring using Prometheus
+# monitoring
 Instrumentator().instrument(app).expose(app)
 
-# add exception handler
+# exception handlers
 register_exception_handlers(app)
