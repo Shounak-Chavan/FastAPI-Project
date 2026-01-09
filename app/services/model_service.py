@@ -9,6 +9,7 @@ def predict_car_price(data:dict):
     cache_key = " ".join([str(val) for val in data.values()])
     cached = get_cache_prediction(cache_key)
     if cached:
+        print('getting from redis')
         return cached
 
     input_data = pd.DataFrame([data])

@@ -20,4 +20,15 @@ def create_prediction(
 
     return prediction
 
+def get_predictions(
+        db:Session,
+        limit:int=20
+):
+    return(
+        db.query(Prediction)
+        .order_by(Prediction.created_at.desc())
+        .limit(limit)
+        .all()
+    )
+
 # Handles database operations for predictions
