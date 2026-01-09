@@ -3,7 +3,6 @@
   <img src="https://img.shields.io/badge/FastAPI-Backend-green?logo=fastapi" />
   <img src="https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql" />
   <img src="https://img.shields.io/badge/Redis-Cache-red?logo=redis" />
-  <img src="https://img.shields.io/badge/License-MIT-green" />
 </p>
 
 # 🚗 Car Price Prediction – Full-Stack AI Application
@@ -252,12 +251,6 @@ Response: [ { "id": 1, "predicted_price": "..." }, ... ]
 ## ⚠️ Disclaimer
 
 This project is **for educational and demonstration purposes only** and should not be used for real commercial car price predictions without proper validation.
-
----
-
-## 📜 License
-
-This project is licensed under the MIT License.
 
 ---
 
