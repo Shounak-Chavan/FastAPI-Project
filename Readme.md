@@ -1,13 +1,13 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Python-3.10-blue?logo=python" />
-  <img src="https://img.shields.io/badge/FastAPI-Backend-green?logo=fastapi" />
-  <img src="https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql" />
-  <img src="https://img.shields.io/badge/Redis-Cache-red?logo=redis" />
-  <img src="https://img.shields.io/badge/License-MIT-green" />
+  <img src="https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi" />
+  <img src="https://img.shields.io/badge/PostgreSQL-Database-336791?logo=postgresql" />
+  <img src="https://img.shields.io/badge/Redis-Cache-DC382D?logo=redis" />
+  <img src="https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker" />
 </p>
 
-# 🚗 Car Price Prediction – Full-Stack AI Application
-### *(ML Model • FastAPI • JWT Auth • Redis Cache • PostgreSQL)*
+# 🚗 AutoValuator AI – Full-Stack AI Application
+### *(Scikit-Learn • FastAPI • JWT Auth • Redis Cache • PostgreSQL • Docker • Render • Prometheus)*
 
 A production-style full-stack AI application that predicts car prices using a trained ML model, with authentication, caching, persistence, monitoring, and modern frontend integration.
 
@@ -17,31 +17,37 @@ This project demonstrates **real backend engineering practices**, not just model
 
 ## 🔥 Features
 
-- 🔐 **JWT Authentication** (Login → Protected APIs)
-- 🤖 **ML-powered car price prediction**
-- 🧠 **Redis caching** for faster repeated predictions
-- 🗄️ **PostgreSQL** for persistent prediction history
-- 📊 **Prediction history dashboard**
-- 🌐 **Frontend–backend integration** (Modern HTML/CSS/JS)
-- 📈 **Prometheus metrics** endpoint
-- 🧩 **Clean, modular FastAPI architecture**
+- 🔐 **Authentication**: JWT-based token auth and API key validation
+- 🤖 **ML Model Prediction**: Trained model predicts used car prices
+- ⚡ **Redis Caching**: Avoid redundant model computation
+- 🗄️ **PostgreSQL**: Persistent prediction history storage
+- 📊 **Prediction History Dashboard**: View and analyze past predictions
+- 🌐 **Frontend–Backend Integration**: Modern HTML/CSS/JS
+- 📈 **Monitoring Ready**: Prometheus metrics + Grafana dashboards
+- 🐳 **Dockerized Setup**: Simplified deployment with Docker Compose
+- ☁️ **Cloud Deployment**: Easily deploy to [Render](https://render.com)
+- 🧩 **Clean, Modular Architecture**: Production-grade FastAPI structure
 
 ---
 
-## 🏗️ Architecture Overview
+## 🧠 Model Input Variables
 
-```
-Frontend (HTML + JS)
-        |
-        |  HTTP (JSON + JWT)
-        v
-FastAPI Backend
- ├── Auth (JWT)
- ├── Prediction API
- ├── Redis Cache
- ├── PostgreSQL DB
- └── Prometheus Metrics
-```
+The prediction model expects the following input features:
+
+| Feature           | Description                          | Example         |
+|------------------|--------------------------------------|-----------------|
+| `company`         | Brand of the car                     | `"Maruti"`      |
+| `year`            | Year of manufacturing                | `2015`          |
+| `owner`           | Number of previous owners            | `"Second"`      |
+| `fuel`            | Fuel type                            | `"Petrol"`      |
+| `seller_type`     | Individual or Dealer                 | `"Individual"`  |
+| `transmission`    | Transmission type                    | `"Manual"`      |
+| `km_driven`       | Kilometers driven                    | `45000`         |
+| `mileage_mpg`     | Mileage in miles per gallon          | `19.5`          |
+| `engine_cc`       | Engine capacity in cc                | `1197`          |
+| `max_power_bhp`   | Maximum power in BHP                 | `88.5`          |
+| `torque_nm`       | Torque in Newton meters              | `113`           |
+| `seats`           | Number of seats                      | `5`             |
 
 ---
 
@@ -84,7 +90,7 @@ Login → JWT → Protected APIs → Response
 
 ## 📊 Prediction Flow
 
-1. User enters car details (12+ parameters)
+1. User enters car details (12 parameters)
 2. Frontend sends request to `/predict`
 3. Backend:
    - Checks Redis cache
@@ -109,115 +115,59 @@ SELECT * FROM predictions ORDER BY created_at DESC;
 
 ---
 
-## 🚀 Running Locally
+## 🚀 Getting Started (Local)
 
-### **1️⃣ Clone the Repository**
+### 1️⃣ Clone the Repository
+
 ```bash
-git clone <repo-url>
-cd <repo>
+git clone https://github.com/your-username/autovaluator-ai.git
+cd autovaluator-ai
 ```
 
-### **2️⃣ Create `.env` File**
+### 2️⃣ Set Environment Variables
+
 ```env
-DATABASE_URL=postgresql://user:password@localhost:5432/db_name
+DATABASE_URL=postgresql://user:password@localhost:5432/autovaluator
 REDIS_URL=redis://localhost:6379/0
-JWT_SECRET_KEY=your_secret_key_here
-API_KEY=your_api_key_here
+JWT_SECRET_KEY=your-secret-key-here
+API_KEY=your-api-key-here
 ```
 
-### **3️⃣ Install Dependencies**
+### 3️⃣ Build and Run via Docker
+
 ```bash
-pip install -r requirements.txt
+docker-compose up --build
 ```
 
-### **4️⃣ Start Required Services**
-- Start PostgreSQL
-- Start Redis
+### 4️⃣ Access Interfaces
 
-### **5️⃣ Run the Application**
-```bash
-uvicorn app.main:app --reload
-```
-
-### **6️⃣ Access the App**
-- Frontend: `http://localhost:8000/login.html`
-- API Docs: `http://localhost:8000/docs`
-- Metrics: `http://localhost:8000/metrics`
+- 🌐 **Frontend**: http://localhost:8000/login.html
+- 📚 **API Docs**: http://localhost:8000/docs
+- 📊 **Metrics**: http://localhost:8000/metrics
+- 🔍 **Prometheus**: http://localhost:9090
+- 📈 **Grafana**: http://localhost:3000
 
 ---
 
-## 📈 Monitoring & Observability
+## ☁️ Deployment on Render
 
-**Prometheus metrics** exposed at `/metrics`
-
-Metrics include:
-- Request count per endpoint
-- Response latency
-- Error rates
-- Cache hit/miss ratio
-- Database query performance
+1. Push code to GitHub
+2. Add `render.yaml` to the project root
+3. Create a new Web Service on Render
+4. Add environment variables
+5. Deploy
 
 ---
 
 ## 🎨 Frontend Features
 
-- **Modern Glassmorphic UI** with gradient backgrounds
-- **Floating label animations** on all input fields
-- **Smooth transitions** and micro-interactions
-- **Loading states** with animations
-- **Error handling** with shake effects
-- **Fully responsive** design (mobile + desktop)
-- **Interactive cards** with hover effects
-
----
-
-## 🧠 Machine Learning Pipeline
-
-### **Input Features (12)**
-- Company
-- Year
-- Owner Type
-- Fuel Type
-- Seller Type
-- Transmission
-- KM Driven
-- Mileage (MPG)
-- Engine (CC)
-- Max Power (BHP)
-- Torque (NM)
-- Seats
-
-### **Model Architecture**
-- Trained regression model
-- Feature scaling & preprocessing
-- Optimized for accuracy and speed
-- Cached predictions for identical inputs
-
----
-
-## 🔑 API Endpoints
-
-### **Authentication**
-```
-POST /login
-Body: { "username": "user", "password": "pass" }
-Response: { "access_token": "jwt_token" }
-```
-
-### **Prediction**
-```
-POST /predict
-Headers: { "token": "jwt_token", "api-key": "key" }
-Body: { car details... }
-Response: { "predicted_price": "₹X,XX,XXX" }
-```
-
-### **History**
-```
-GET /predictions
-Headers: { "token": "jwt_token", "api-key": "key" }
-Response: [ { "id": 1, "predicted_price": "..." }, ... ]
-```
+- ✨ **Modern Glassmorphic UI** with gradient backgrounds
+- 🎭 **Floating label animations** on all input fields
+- 🔄 **Smooth transitions** and micro-interactions
+- ⏳ **Loading states** with animations
+- ⚠️ **Error handling** with shake effects
+- 📱 **Fully responsive** design (mobile + desktop)
+- 🎯 **Interactive cards** with hover effects
 
 ---
 
@@ -236,12 +186,10 @@ Response: [ { "id": 1, "predicted_price": "..." }, ... ]
 
 ## 🔮 Future Improvements
 
-- 🐳 **Dockerization** & container orchestration
 - 🔄 **Alembic migrations** for database versioning
 - 👥 **Role-based access control** (RBAC)
 - 📄 **Pagination** for prediction history
 - ⚛️ **React frontend** upgrade
-- ☁️ **Cloud deployment** (AWS / Render / Railway)
 - 📊 **Analytics dashboard** with charts
 - 🔔 **Real-time notifications**
 - 🧪 **Unit & integration tests**
@@ -252,6 +200,12 @@ Response: [ { "id": 1, "predicted_price": "..." }, ... ]
 ## ⚠️ Disclaimer
 
 This project is **for educational and demonstration purposes only** and should not be used for real commercial car price predictions without proper validation.
+
+---
+
+## 👨‍💻 Author
+
+Made with ❤️ by **Shounak**
 
 ---
 
