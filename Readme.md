@@ -120,8 +120,8 @@ SELECT * FROM predictions ORDER BY created_at DESC;
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/autovaluator-ai.git
-cd autovaluator-ai
+git clone https://github.com/your-username/Autovaluator-Ai.git
+cd AutoValuator-Ai
 ```
 
 ### 2️⃣ Set Environment Variables
